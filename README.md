@@ -37,6 +37,8 @@ docker compose up --build
 
 Open `http://localhost:3000`. The API is available at `http://localhost:8000/health`. Stop the stack with `docker compose down`; its demo database remains in the `orchestrator_data` volume. Use `docker compose down -v` only when deliberately resetting all container-managed demo data.
 
+If your machine already uses ports `3000` or `8000`, choose free ports and keep the browser API URL aligned with the API port before building, for example `WEB_PORT=3002 API_PORT=8010 NEXT_PUBLIC_API_BASE_URL=http://localhost:8010 docker compose up --build`. Compose aligns its default CORS origins with `WEB_PORT` for both `localhost` and `127.0.0.1`; set `CORS_ORIGINS` explicitly only when using a non-localhost dashboard URL.
+
 For code changes with hot reload, run the development overlay instead:
 
 ```sh
