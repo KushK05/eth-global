@@ -1,0 +1,19 @@
+{
+  "name": "autonomous-working-capital",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": ["apps/web", "services/aqua-gateway", "services/hedera-gateway"],
+  "scripts": {
+    "dev": "npm run dev --workspace apps/web",
+    "api:dev": "services/orchestrator/.venv/bin/python -m uvicorn app.main:app --app-dir services/orchestrator --reload --port 8000",
+    "api:test": "PYTHONPATH=services/orchestrator services/orchestrator/.venv/bin/python -m unittest discover -s services/orchestrator/tests -v",
+    "adk:run": "cd services/orchestrator && .venv/bin/adk run working_capital_agent",
+    "hedera:ats:prepare": "npm run ats:prepare --workspace services/hedera-gateway",
+    "hedera:x402:gateway": "npm run x402:gateway --workspace services/hedera-gateway",
+    "aqua:test": "npm run test --workspace services/aqua-gateway",
+    "hedera:research:serve": "npm run research:serve --workspace services/hedera-gateway",
+    "hedera:research:pay": "npm run research:pay --workspace services/hedera-gateway",
+    "build": "npm run build --workspace apps/web",
+    "typecheck": "npm run typecheck --workspace apps/web && npm run typecheck --workspace services/aqua-gateway && npm run typecheck --workspace services/hedera-gateway"
+  }
+}
