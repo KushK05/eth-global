@@ -10,7 +10,11 @@ from google.adk.agents import Agent
 from dotenv import load_dotenv
 
 
-load_dotenv(Path(__file__).resolve().parents[3] / ".env")
+for directory in Path(__file__).resolve().parents:
+    candidate = directory / ".env"
+    if candidate.is_file():
+        load_dotenv(candidate)
+        break
 
 
 def prepare_ats_issuance(

@@ -6,7 +6,16 @@ from typing import Any
 
 from dotenv import load_dotenv
 
-load_dotenv(Path(__file__).resolve().parents[3] / ".env")
+
+def load_project_env() -> None:
+    for directory in Path(__file__).resolve().parents:
+        candidate = directory / ".env"
+        if candidate.is_file():
+            load_dotenv(candidate)
+            return
+
+
+load_project_env()
 
 
 def _configured(*names: str) -> bool:
